@@ -1,1 +1,1 @@
-web: gunicorn KetoWit.wsgi --log-file -
+web: gunicorn UMH.wsgi --log-file -
