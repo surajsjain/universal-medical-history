@@ -25,6 +25,7 @@ eth-keys==0.2.4
 eth-rlp==0.2.1
 eth-typing==2.2.2
 eth-utils==1.9.5
+gunicorn==20.0.4
 hexbytes==0.2.1
 html5lib==1.0.1
 humanfriendly==9.1
