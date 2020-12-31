@@ -1,7 +1,7 @@
 *.sqlite3
 
 umhEnv/
-.idea/
+idea/
 
 **/migrations
 **/__pycache__
