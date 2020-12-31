@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class UserDetails(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    is_doctor = models.BooleanField(default=False)
 
     gender = models.CharField(max_length=15, null=True, blank=True)
     date_of_birth = models.DateField(default= datetime.now())
