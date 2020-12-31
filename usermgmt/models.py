@@ -17,3 +17,6 @@ class UserDetails(models.Model):
     iso_country_code = models.CharField(max_length=5)
 
     occupation = models.CharField(max_length=40, blank=True)
+
+    def __str__(self):
+        return str(self.user.id) + " - " + str(self.user.username)
