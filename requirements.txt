@@ -69,4 +69,5 @@ urllib3==1.25.8
 web3==4.7.1
 webencodings==0.5.1
 websockets==6.0
+whitenoise==5.2.0
 wrapt==1.12.1
