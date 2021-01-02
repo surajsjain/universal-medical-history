@@ -1,7 +1,6 @@
-from datetime import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 class UserDetails(models.Model):
@@ -12,7 +11,7 @@ class UserDetails(models.Model):
     is_doctor = models.BooleanField(default=False)
 
     gender = models.CharField(max_length=15, null=True, blank=True)
-    date_of_birth = models.DateField(default= datetime.now())
+    date_of_birth = models.DateField(default=now)
     blood_group = models.CharField(max_length=5, blank=True)
 
     address = models.CharField(max_length=300)
