@@ -28,6 +28,12 @@ class TongueAndLipExamination(models.Model):
     tongue_status = models.CharField(max_length=30, blank=True)
     lip_status = models.CharField(max_length=30, blank=True)
 
+class SkinExamination(models.Model):
+    visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
+    skin_type = models.CharField(max_length=30)
+    skin_color = models.CharField(max_length=30)
+    skin_pigment = models.CharField(max_length=30)
+
 class Vaccine(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=250)
