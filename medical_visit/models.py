@@ -14,9 +14,9 @@ class Visit(models.Model):
 
 class GeneralCheckup(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
-    body_temperature_in_fahrenheit = models.FloatField()
-    weight_in_kilograms = models.FloatField()
-    height_in_inches = models.FloatField()
+    body_temperature_in_fahrenheit = models.FloatField(blank=True)
+    weight_in_kilograms = models.FloatField(blank=True)
+    height_in_inches = models.FloatField(blank=True)
 
     pulse_per_min = models.IntegerField(blank=True, null=True, default=None)
     blood_pressure = models.IntegerField(blank=True, null=True, default=None)
