@@ -23,6 +23,11 @@ class GeneralCheckup(models.Model):
 
     comments = models.CharField(max_length=2000, blank=True, default='')
 
+class TongueAndLipExamination(models.Model):
+    visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
+    tongue_status = models.CharField(max_length=30)
+    lip_status = models.CharField(max_length=30)
+
 class Vaccine(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=250)
