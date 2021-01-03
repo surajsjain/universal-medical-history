@@ -18,6 +18,9 @@ class GeneralCheckup(models.Model):
     weight_in_kilograms = models.FloatField()
     height_in_inches = models.FloatField()
 
+    pulse_per_min = models.IntegerField(blank=True, null=True, default=None)
+    blood_pressure = models.IntegerField(blank=True, null=True, default=None)
+
 class Vaccine(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=250)
