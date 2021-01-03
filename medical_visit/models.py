@@ -48,7 +48,7 @@ class DrugPrescription(models.Model):
     comments = models.CharField(max_length=2000)
 
 def user_reports_dir_path(instance, filename):
-    return 'user_' + str(instance.user.id) + '/'
+    return 'user_' + str(instance.visit.patient.id) + '_VISIT_' + str(instance.visit.id) + '_TEST_' + instance.name + '/'
 
 class TestPrescription(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
