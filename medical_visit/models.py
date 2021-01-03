@@ -54,4 +54,4 @@ class TestPrescription(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=250)
 
-    report = models.FileField(upload_to=user_reports_dir_path)
+    report = models.FileField(upload_to=user_reports_dir_path, blank=True)
