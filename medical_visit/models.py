@@ -25,8 +25,8 @@ class GeneralCheckup(models.Model):
 
 class TongueAndLipExamination(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
-    tongue_status = models.CharField(max_length=30)
-    lip_status = models.CharField(max_length=30)
+    tongue_status = models.CharField(max_length=30, blank=True)
+    lip_status = models.CharField(max_length=30, blank=True)
 
 class Vaccine(models.Model):
     visit = models.ForeignKey(Visit, on_delete=models.SET_NULL, null=True)
