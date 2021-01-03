@@ -3,6 +3,7 @@
 umhEnv/
 idea/
 .idea/
+media/
 
 **/migrations
 **/__pycache__
