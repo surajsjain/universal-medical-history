@@ -8,3 +8,4 @@ class Visit(models.Model):
     doctor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='doctor')
     date_time = models.DateTimeField(default=now)
     completed = models.BooleanField(default=False)
+    purpose = models.CharField(max_length=3000, default='')
