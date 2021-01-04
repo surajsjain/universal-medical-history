@@ -162,8 +162,13 @@
                                                         class="nav-item dropdown-item">Profile</a></li>
 
                                 <li class="dropdown-divider"></li>
-                                <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log
+                                <li class="nav-link"><a href="javascript:{document.getElementById('logout').submit()}"
+                                                        class="nav-item dropdown-item">Log
                                     out</a></li>
+                                <form action="{% url 'logout' %}" method="POST" id="logout">
+                                    {% csrf_token %}
+                                    <input type="hidden">
+                                </form>
                             </ul>
                         </li>
                         <li class="separator d-lg-none"></li>

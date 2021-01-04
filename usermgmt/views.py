@@ -28,3 +28,8 @@ def login(request):
         except:
             print('could not get the user')
             return redirect('login')
+
+def logout(request):
+    if(request.method == 'POST'):
+        auth.logout(request)
+        return redirect('login')
