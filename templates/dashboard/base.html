@@ -66,6 +66,12 @@
             src="https://maps.googleapis.com/maps-api-v3/api/js/43/3/common.js"></script>
     <script type="text/javascript" charset="UTF-8"
             src="https://maps.googleapis.com/maps-api-v3/api/js/43/3/util.js"></script>
+
+    {% if not user.is_authenticated %}
+        <script type="text/javascript">
+            window.open("{% url 'login' %}", "_top")
+        </script>
+    {% endif %}
 </head>
 
 <body class="">
