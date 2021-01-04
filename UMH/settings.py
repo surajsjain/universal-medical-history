@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usermgmt.apps.UsermgmtConfig',
     'medical_visit.apps.MedicalVisitConfig',
+    'user_dash.apps.UserDashConfig',
 ]
 
 MIDDLEWARE = [
