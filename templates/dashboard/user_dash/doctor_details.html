@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block MainContent %}
+
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Book a visit</h1>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="doctor_id" value="{{ doctor.id }}"/>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="purpose">State the purpose of your visit</label>
+                                    <textarea rows="4" cols="80" class="form-control" name="purpose"
+                                              placeholder="Why do you want to visit Dr.{{ doctor.user.first_name }}? What issue are you facing?"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="date_time">What date and time would you prefer?</label>
+                                    <input type="datetime-local" class="form-control" name="date_time"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="submit" value="Book Now!" class="btn btn-fill btn-primary"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="card-body">
+                    <p class="card-text">
+                    </p>
+                    <div class="author">
+                        <div class="block block-one"></div>
+                        <div class="block block-two"></div>
+                        <div class="block block-three"></div>
+                        <div class="block block-four"></div>
+                        <h5 class="title">Dr.{{ doctor.user.first_name }} {{ doctor.user.last_name }}</h5>
+                        <p class="description">
+                            {{ doctor.occupation }}
+                        </p>
+                    </div>
+                    <p></p>
+                    <div class="card-description" style="text-align: center">
+                        <div>{{ doctor.address }}</div>
+                        <br/>
+                        <h4>{{ doctor.city }}, {{ doctor.iso_country_code }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

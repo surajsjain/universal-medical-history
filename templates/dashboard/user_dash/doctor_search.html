@@ -103,7 +103,7 @@
                                     {{ doctor.iso_country_code }}
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-fill btn-primary">Book a visit!</a>
+                                    <a href="{% url 'doc_details' doctor_id=doctor.id %}" class="btn btn-fill btn-primary">Book a visit!</a>
                                 </td>
                             </tr>
                             {% endfor %}

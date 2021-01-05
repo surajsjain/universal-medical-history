@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from medical_visit.models import *
 from usermgmt.models import UserDetails
@@ -101,3 +101,27 @@ def doctor_search(request):
     ctxt['doctors'] = doctors
 
     return render(request, 'dashboard/user_dash/doctor_search.html', context=ctxt)
+
+
+def book_visit(request, doctor_id):
+    ctxt = {}
+    ctxt['dash_type'] = 'user'
+
+    if(request.method == "GET"):
+        doctor = UserDetails.objects.get(user__id=doctor_id)
+        ctxt['doctor'] = doctor
+
+        return render(request, 'dashboard/user_dash/doctor_details.html', context=ctxt)
+
+    elif(request.method == "POST"):
+        data = request.POST
+
+        doctor_visit = Visit()
+        doctor_visit.patient = request.user
+        doctor_visit.doctor = User.objects.get(id=data['doctor_id'])
+        doctor_visit.date_time = data['date_time']
+        doctor_visit.purpose = data['purpose']
+
+        doctor_visit.save()
+
+        return redirect('ud_mainDash')
