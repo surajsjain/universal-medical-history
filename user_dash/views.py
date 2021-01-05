@@ -4,6 +4,7 @@ from django.db.models import Q
 from django.shortcuts import render
 
 from medical_visit.models import *
+from usermgmt.models import UserDetails
 
 
 # Create your views here.
@@ -50,15 +51,15 @@ def prev_visits(request):
         data = request.POST
         if (data['category'] == 'doctor'):
             doc_visits = Visit.objects.filter(Q(patient=request.user) & Q(completed=True) & Q(
-                Q(doctor__username__contains=data['search_term']) | Q(
-                    doctor__first_name__contains=data['search_term']) | Q(
-                    doctor__last_name__contains=data['search_term'])))
+                Q(doctor__username__icontains=data['search_term']) | Q(
+                    doctor__first_name__icontains=data['search_term']) | Q(
+                    doctor__last_name__icontains=data['search_term'])))
         elif (data['category'] == 'purpose'):
             doc_visits = Visit.objects.filter(
-                Q(patient=request.user) & Q(completed=True) & Q(purpose__contains=data['search_term']))
+                Q(patient=request.user) & Q(completed=True) & Q(purpose__icontains=data['search_term']))
         elif (data['category'] == 'diagnosis'):
             doc_visits = Visit.objects.filter(
-                Q(patient=request.user) & Q(completed=True) & Q(diagnosis__contains=data['search_term']))
+                Q(patient=request.user) & Q(completed=True) & Q(diagnosis__icontains=data['search_term']))
 
     ctxt['visits'] = doc_visits
 
@@ -69,6 +70,34 @@ def doctor_search(request):
     ctxt = {}
     ctxt['dash_type'] = 'user'
     ctxt['active'] = 'doc_search'
+    ctxt['same_city'] = True
 
+    user_det = UserDetails.objects.get(user=request.user)
+    user_city = user_det.city
+
+    if(request.method == 'GET'):
+        doctors = UserDetails.objects.filter(Q(city__icontains=user_city) & Q(is_doctor=True))
+
+
+    elif(request.method == 'POST'):
+        data = request.POST
+
+        if(data['category'] == 'doctor'):
+            doctors = UserDetails.objects.filter(Q(is_doctor=True) & Q(city__icontains=user_city) & Q(
+                Q(user__username__icontains=data['search_term']) | Q(
+                    user__first_name__icontains=data['search_term']) | Q(
+                    user__last_name__icontains=data['search_term'])))
+
+        elif(data['category'] == 'occupation'):
+            doctors = UserDetails.objects.filter(Q(is_doctor=True) & Q(city__icontains=user_city) & Q(occupation__icontains=data['search_term']))
+
+        elif(data['category'] == 'city'):
+            ctxt['same_city'] = False
+            ctxt['city'] = data['search_term']
+
+            doctors = UserDetails.objects.filter(Q(is_doctor=True) & Q(city__icontains=data['search_term']))
+
+
+    ctxt['doctors'] = doctors
 
     return render(request, 'dashboard/user_dash/doctor_search.html', context=ctxt)

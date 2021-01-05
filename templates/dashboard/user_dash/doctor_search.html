@@ -4,7 +4,7 @@
 {% block MainContent %}
 
     <div class="row">
-        <div class="col-lg-9 col-md-12">
+        <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -42,11 +42,74 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-12">
-            <div class="card">
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Here're the doctors in
+                        {% if same_city %}
+                        your city
+                        {% else %}
+                        {{ city }}
+                        {% endif %}
+                    </h4>
+                </div>
                 <div class="card-body">
-                    <h4>Book a visit today!</h4>
-                    <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
+                    <div class="table-responsive">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Specialization
+                                </th>
+                                <th>
+                                    Address
+                                </th>
+                                <th class="text-center">
+                                    City
+                                </th>
+                                <th class="text-center">
+                                    Country
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for doctor in doctors %}
+                            <tr>
+                                <td>
+                                    {{ doctor.id }}
+                                </td>
+                                <td>
+                                    {{ doctor.user.first_name }} {{ doctor.user.last_name }}
+                                </td>
+                                <td>
+                                    {{ doctor.occupation }}
+                                </td>
+                                <td>
+                                    {{ doctor.address }}
+                                </td>
+                                <td class="text-center">
+                                    {{ doctor.city }}
+                                </td>
+                                <td class="text-center">
+                                    {{ doctor.iso_country_code }}
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-fill btn-primary">Book a visit!</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
