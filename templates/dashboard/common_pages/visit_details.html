@@ -1,10 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'dashboard/base.html' %}
+
+
+{% block MainContent %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h4>Visit ID: {{ visit.id }}</h4>
+                        </div>
+                        <div class="col-md-7">
+                            <h4>Patient:</h4>
+                            <h3>
+                                {% if user_details.gender == "Male" %}
+                                    Mr.
+                                {% elif user_details.gender == "Female" %}
+                                    Ms.
+                                {% endif %}
+                                {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                            </h3>
+                        </div>
+                        <div class="col-md-4">
+                            <h4>Doctor:</h4>
+                            <h3>
+                                Dr. {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h5>Address</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <p>
+                                {{ doctor_details.address }} <br/>
+                                {{ doctor_details.city }}, {{ doctor_details.iso_country_code }}
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Date &amp; Time:</h5>
+                            <h4>
+                                {{ visit.date_time }}
+                            </h4>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h5>Purpose</h5>
+                        </div>
+                        <div class="col-md-7">
+                            <p>
+                                "{{ visit.purpose }}"
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>Diagnosis:</h5>
+                            <h4>
+                                {{ visit.diagnosis }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

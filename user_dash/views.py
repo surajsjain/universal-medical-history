@@ -125,3 +125,35 @@ def book_visit(request, doctor_id):
         doctor_visit.save()
 
         return redirect('ud_mainDash')
+
+def visit_details(request, visit_id, viewer):
+    ctxt = {}
+    if(viewer == 0):
+        ctxt['dash_type'] = 'user'
+    else:
+        ctxt['dash_type'] = 'doctor'
+
+    visit = Visit.objects.get(id=visit_id)
+    ctxt['visit'] = visit
+    patent_id = visit.patient.id
+    doctor_id = visit.doctor.id
+
+    ctxt['user_details'] = UserDetails.objects.get(user__id=patent_id)
+    ctxt['doctor_details'] = UserDetails.objects.get(user__id=doctor_id)
+
+    try:
+        ctxt['general_checkup'] = GeneralCheckup.objects.get(visit__id=visit_id)
+    except:
+        ctxt['general_checkup'] = None
+
+    try:
+        ctxt['skin_examination'] = SkinExamination.objects.get(visit__id=visit_id)
+    except:
+        ctxt['skin_examination'] = None
+
+    # Will return an array
+    ctxt['vaccinations'] = Vaccine.objects.filter(visit__id=visit_id)
+    ctxt['drug_prescriptions'] = DrugPrescription.objects.filter(visit__id=visit_id)
+    ctxt['test_prescriptions'] = TestPrescription.objects.filter(visit__id=visit_id)
+
+    return render(request, 'dashboard/common_pages/visit_details.html', context=ctxt)
