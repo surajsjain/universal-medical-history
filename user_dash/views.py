@@ -63,3 +63,12 @@ def prev_visits(request):
     ctxt['visits'] = doc_visits
 
     return render(request, 'dashboard/user_dash/prev_visits.html', context=ctxt)
+
+
+def doctor_search(request):
+    ctxt = {}
+    ctxt['dash_type'] = 'user'
+    ctxt['active'] = 'doc_search'
+
+
+    return render(request, 'dashboard/user_dash/doctor_search.html', context=ctxt)

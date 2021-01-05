@@ -9,7 +9,7 @@
                     <h4 class="card-title">Pending Doctor Visits</h4>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
+                    <a href="{% url 'doc_search' %}" class="btn btn-fill btn-primary"> + Book a new Visit</a>
                     {% if visits|length == 0 %}
                         <div>You have no upcoming visits</div>
                     {% else %}

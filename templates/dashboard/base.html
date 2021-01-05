@@ -112,6 +112,17 @@
                         </a>
                     </li>
 
+                    <li class="
+                        {% if active == 'doc_search' %}
+                            active
+                        {% endif %}
+                    ">
+                        <a href="{% url 'doc_search' %}">
+                            <i class="tim-icons icon-calendar-60"></i>
+                            <p>Search Doctors</p>
+                        </a>
+                    </li>
+
                 {% endif %}
 
 

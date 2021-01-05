@@ -1,0 +1,55 @@
+{% extends 'dashboard/base.html' %}
+
+
+{% block MainContent %}
+
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-11">
+                            Filter
+                        </div>
+                        <div class="col-1">
+                            <a href="{% url 'doc_search' %}">
+                                <i class="tim-icons icon-refresh-01"> Reset</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3 px-md-1 mt-1">
+                                <select class="form-control" name="category">
+                                    <option class="form-control" value="doctor" style="color: black" selected>Doctor Name</option>
+                                    <option class="form-control" value="occupation" style="color: black">Specialization</option>
+                                    <option class="form-control" value="city" style="color: black">Another City</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7 px-md-1 mt-1">
+                                <input type="text" class="form-control" placeholder="Ex: Joe, Dentist, or London"
+                                       name="search_term">
+                            </div>
+                            <div class="col-md-2 px-md-1">
+                                <input type="submit" value="Search" class="btn btn-fill btn-info">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4>Book a visit today!</h4>
+                    <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
