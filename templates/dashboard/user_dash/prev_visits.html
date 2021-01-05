@@ -4,12 +4,48 @@
 {% block MainContent %}
 
     <div class="row">
-        <div class="col-lg-3 col-md-12">
+        <div class="col-lg-9 col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4>Book a visit today!</h4>
+                    <div class="row">
+                        <div class="col-11">
+                            Filter
+                        </div>
+                        <div class="col-1">
+                            <a href="{% url 'ud_prev_visits' %}">
+                                <i class="tim-icons icon-refresh-01"></i>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="card-body">
+                    <form action="#" method="POST">
+                        <div class="row">
+                            <div class="col-md-3 px-md-1 mt-1">
+                                <select class="form-control" name="category">
+                                    <option class="form-control" value="doctor" style="color: black">Doctor</option>
+                                    <option class="form-control" value="purpose" style="color: black">Purpose</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7 px-md-1 mt-1">
+                                <input type="text" class="form-control" placeholder="Ex: Joe or COVID" name="search_term">
+                            </div>
+                            <div class="col-md-2 px-md-1">
+                                <input type="submit" value="Search" class="btn btn-fill btn-success">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="card">
+{#                <div class="card-header">#}
+{#                    <h4>Book a visit today!</h4>#}
+{#                </div>#}
+                <div class="card-body">
+                    <h4>Book a visit today!</h4>
                     <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
                 </div>
             </div>
