@@ -110,11 +110,11 @@
         <div class="col-lg-3 col-md-12">
             <div class="card ">
                 <div class="card-header">
-                    <h4 class="card-title">Your Pending Tests</h4>
+                    <h4 class="card-title">Your Pending medical tests</h4>
                 </div>
                 <div class="card-body">
-                    {% if drug_prescriptions|length == 0 %}
-                    <div>You have no drug prescriptions</div>
+                    {% if test_prescriptions|length == 0 %}
+                    <div>You have no pending medical tests</div>
                     {% else %}
                     <div class="table">
                         <table class="table tablesorter" id="">
