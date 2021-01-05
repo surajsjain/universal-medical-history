@@ -21,4 +21,7 @@ class UserDetails(models.Model):
     occupation = models.CharField(max_length=40, blank=True)
 
     def __str__(self):
-        return str(self.user.id) + " - " + str(self.user.username)
+        try:
+            return str(self.user.id) + " - " + str(self.user.username)
+        except:
+            return 'Deleted User'
