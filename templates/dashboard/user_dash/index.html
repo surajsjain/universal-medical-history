@@ -2,6 +2,138 @@
 
 {% block MainContent %}
 
+    <div class="row">
+        <div class="col-lg-4 col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Pending Doctor Visits</h4>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
+                    <div class="table">
+                        <table class="table tablesorter" id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th class="text-center">
+                                    Purpose
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for visit in visits %}
+                                <tr>
+                                    <td>
+                                        {{ visit.date_time.date }}
+                                    </td>
+                                    <td>
+                                        {{ visit.date_time.time }}
+                                    </td>
+                                    <td>
+                                        {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ visit.purpose }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Your Current Drug Prescriptions</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table">
+                        <table class="table tablesorter" id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Frequency Per day
+                                </th>
+                                <th>
+                                    Comments
+                                </th>
+                                {#                                <th class="text-center">#}
+                                {#                                    Status#}
+                                {#                                </th>#}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for prescription in drug_prescriptions %}
+                                <tr>
+                                    <td>
+                                        {{ prescription.name }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ prescription.frequency_per_day }}
+                                    </td>
+                                    <td>
+                                        {{ prescription.comments }}
+                                    </td>
+                                    {#                                <td class="text-center">#}
+                                    {#                                    $36,738#}
+                                    {#                                </td>#}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Your Pending Tests</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table">
+                        <table class="table tablesorter" id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Test Name
+                                </th>
+                                <th>
+                                    Report Status
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for test in test_prescriptions %}
+                                <tr>
+                                    <td>
+                                        {{ test.name }}
+                                    </td>
+                                    <td>
+                                        <a href="#" style="color: #00f2c3;">Upload Report</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
