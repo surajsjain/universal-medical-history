@@ -8,6 +8,8 @@ from medical_visit.models import *
 # Create your views here.
 def mainDash(request):
     ctxt = {}
+    ctxt['dash_type'] = 'user'
+    ctxt['active'] = 'dashboard'
 
     doc_visits = Visit.objects.filter(Q(patient=request.user) & Q(completed = False))
     ctxt['visits'] = doc_visits
@@ -34,3 +36,10 @@ def mainDash(request):
     print(ctxt)
 
     return render(request, 'dashboard/user_dash/index.html', context=ctxt)
+
+def prev_visits(request):
+    ctxt = {}
+    ctxt['dash_type'] = 'user'
+    ctxt['active'] = 'prev_visits'
+
+    return render(request, 'dashboard/user_dash/prev_visits.html', context=ctxt)
