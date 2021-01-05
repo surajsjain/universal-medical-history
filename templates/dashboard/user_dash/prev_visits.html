@@ -13,8 +13,9 @@
                         </div>
                         <div class="col-1">
                             <a href="{% url 'ud_prev_visits' %}">
-                                <i class="tim-icons icon-refresh-01"></i>
+                                <i class="tim-icons icon-refresh-01"> Reset</i>
                             </a>
+
                         </div>
                     </div>
 
@@ -29,10 +30,11 @@
                                 </select>
                             </div>
                             <div class="col-md-7 px-md-1 mt-1">
-                                <input type="text" class="form-control" placeholder="Ex: Joe or COVID" name="search_term">
+                                <input type="text" class="form-control" placeholder="Ex: Joe or COVID"
+                                       name="search_term">
                             </div>
                             <div class="col-md-2 px-md-1">
-                                <input type="submit" value="Search" class="btn btn-fill btn-success">
+                                <input type="submit" value="Search" class="btn btn-fill btn-info">
                             </div>
                         </div>
                     </form>
@@ -41,12 +43,66 @@
         </div>
         <div class="col-lg-3 col-md-12">
             <div class="card">
-{#                <div class="card-header">#}
-{#                    <h4>Book a visit today!</h4>#}
-{#                </div>#}
                 <div class="card-body">
                     <h4>Book a visit today!</h4>
                     <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Your Previous Visits</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th class="text-center">
+                                    Purpose
+                                </th>
+                                <th class="text-center">
+                                    Diagnosis
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    Dakota Rice
+                                </td>
+                                <td>
+                                    Niger
+                                </td>
+                                <td>
+                                    Oud-Turnhout
+                                </td>
+                                <td class="text-center">
+                                    $36,738
+                                </td>
+                                <td class="text-center">
+                                    something
+                                </td>
+                                <td>
+                                    <a href="#">View Details</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
