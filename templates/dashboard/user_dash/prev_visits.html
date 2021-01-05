@@ -22,11 +22,13 @@
                 </div>
                 <div class="card-body">
                     <form action="#" method="POST">
+                        {% csrf_token %}
                         <div class="row">
                             <div class="col-md-3 px-md-1 mt-1">
                                 <select class="form-control" name="category">
                                     <option class="form-control" value="doctor" style="color: black">Doctor</option>
                                     <option class="form-control" value="purpose" style="color: black">Purpose</option>
+                                    <option class="form-control" value="diagnosis" style="color: black">Diagnosis</option>
                                 </select>
                             </div>
                             <div class="col-md-7 px-md-1 mt-1">
@@ -80,26 +82,28 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for visit in visits %}
                             <tr>
                                 <td>
-                                    Dakota Rice
+                                    {{ visit.date_time.date }}
                                 </td>
                                 <td>
-                                    Niger
+                                    {{ visit.date_time.time }}
                                 </td>
                                 <td>
-                                    Oud-Turnhout
+                                    {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
                                 </td>
                                 <td class="text-center">
-                                    $36,738
+                                    {{ visit.purpose }}
                                 </td>
                                 <td class="text-center">
-                                    something
+                                    {{ visit.diagnosis }}
                                 </td>
                                 <td>
                                     <a href="#">View Details</a>
                                 </td>
                             </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
