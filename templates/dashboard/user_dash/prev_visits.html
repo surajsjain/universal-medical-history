@@ -106,7 +106,7 @@
                                     {{ visit.diagnosis }}
                                 </td>
                                 <td>
-                                    <a href="#">View Details</a>
+                                    <a href="{% url 'visit_details' visit_id=visit.id viewer=0 %}">View Details</a>
                                 </td>
                             </tr>
                             {% endfor %}
