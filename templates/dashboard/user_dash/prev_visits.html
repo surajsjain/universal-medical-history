@@ -65,6 +65,9 @@
                             <thead class=" text-primary">
                             <tr>
                                 <th>
+                                    Visit ID
+                                </th>
+                                <th>
                                     Date
                                 </th>
                                 <th>
@@ -84,6 +87,9 @@
                             <tbody>
                             {% for visit in visits %}
                             <tr>
+                                <td>
+                                    {{ visit.id }}
+                                </td>
                                 <td>
                                     {{ visit.date_time.date }}
                                 </td>

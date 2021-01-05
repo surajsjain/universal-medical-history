@@ -11,47 +11,53 @@
                 <div class="card-body">
                     <a href="#" class="btn btn-fill btn-primary"> + Book a new Visit</a>
                     {% if visits|length == 0 %}
-                    <div>You have no upcoming visits</div>
+                        <div>You have no upcoming visits</div>
                     {% else %}
-                    <div class="table">
-                        <table class="table tablesorter" id="">
-                            <thead class=" text-primary">
-                            <tr>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Time
-                                </th>
-                                <th>
-                                    Doctor
-                                </th>
-                                <th class="text-center">
-                                    Purpose
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for visit in visits %}
+                        <div class="table">
+                            <table class="table tablesorter" id="">
+                                <thead class=" text-primary">
                                 <tr>
-                                    <td>
-                                        {{ visit.date_time.date }}
-                                    </td>
-                                    <td>
-                                        {{ visit.date_time.time }}
-                                    </td>
-                                    <td>
-                                        {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ visit.purpose }}
-                                    </td>
+                                    <th>
+                                        Visit ID
+                                    </th>
+                                    <th>
+                                        Date
+                                    </th>
+                                    <th>
+                                        Time
+                                    </th>
+                                    <th>
+                                        Doctor
+                                    </th>
+                                    <th class="text-center">
+                                        Purpose
+                                    </th>
                                 </tr>
-                            {% endfor %}
+                                </thead>
+                                <tbody>
+                                {% for visit in visits %}
+                                    <tr>
+                                        <td>
+                                            {{ visit.id }}
+                                        </td>
+                                        <td>
+                                            {{ visit.date_time.date }}
+                                        </td>
+                                        <td>
+                                            {{ visit.date_time.time }}
+                                        </td>
+                                        <td>
+                                            {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ visit.purpose }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -63,46 +69,46 @@
                 </div>
                 <div class="card-body">
                     {% if drug_prescriptions|length == 0 %}
-                    <div>You have no drug prescriptions</div>
+                        <div>You have no drug prescriptions</div>
                     {% else %}
-                    <div class="table">
-                        <table class="table tablesorter" id="">
-                            <thead class=" text-primary">
-                            <tr>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Frequency Per day
-                                </th>
-                                <th>
-                                    Comments
-                                </th>
-                                {#                                <th class="text-center">#}
-                                {#                                    Status#}
-                                {#                                </th>#}
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for prescription in drug_prescriptions %}
+                        <div class="table">
+                            <table class="table tablesorter" id="">
+                                <thead class=" text-primary">
                                 <tr>
-                                    <td>
-                                        {{ prescription.name }}
-                                    </td>
-                                    <td class="text-center">
-                                        {{ prescription.frequency_per_day }}
-                                    </td>
-                                    <td>
-                                        {{ prescription.comments }}
-                                    </td>
-                                    {#                                <td class="text-center">#}
-                                    {#                                    $36,738#}
-                                    {#                                </td>#}
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Frequency Per day
+                                    </th>
+                                    <th>
+                                        Comments
+                                    </th>
+                                    {#                                <th class="text-center">#}
+                                    {#                                    Status#}
+                                    {#                                </th>#}
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                {% for prescription in drug_prescriptions %}
+                                    <tr>
+                                        <td>
+                                            {{ prescription.name }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ prescription.frequency_per_day }}
+                                        </td>
+                                        <td>
+                                            {{ prescription.comments }}
+                                        </td>
+                                        {#                                <td class="text-center">#}
+                                        {#                                    $36,738#}
+                                        {#                                </td>#}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -114,34 +120,34 @@
                 </div>
                 <div class="card-body">
                     {% if test_prescriptions|length == 0 %}
-                    <div>You have no pending medical tests</div>
+                        <div>You have no pending medical tests</div>
                     {% else %}
-                    <div class="table">
-                        <table class="table tablesorter" id="">
-                            <thead class=" text-primary">
-                            <tr>
-                                <th>
-                                    Test Name
-                                </th>
-                                <th>
-                                    Report Status
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for test in test_prescriptions %}
+                        <div class="table">
+                            <table class="table tablesorter" id="">
+                                <thead class=" text-primary">
                                 <tr>
-                                    <td>
-                                        {{ test.name }}
-                                    </td>
-                                    <td>
-                                        <a href="#" style="color: #00f2c3;">Upload Report</a>
-                                    </td>
+                                    <th>
+                                        Test Name
+                                    </th>
+                                    <th>
+                                        Report Status
+                                    </th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                {% for test in test_prescriptions %}
+                                    <tr>
+                                        <td>
+                                            {{ test.name }}
+                                        </td>
+                                        <td>
+                                            <a href="#" style="color: #00f2c3;">Upload Report</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     {% endif %}
                 </div>
             </div>
