@@ -100,7 +100,7 @@
                                         {{ patient.city }}, {{ patient.iso_country_code }}
                                     </td>
                                     <td class="text-center">
-                                        <a href="#">View History</a>
+                                        <a href="{% url 'medical_profile' patient_id=patient.id %}">View History</a>
                                     </td>
                                 </tr>
                             {% endfor %}

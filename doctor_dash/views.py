@@ -106,3 +106,12 @@ def medicalHistory(request):
     ctxt['patients'] = patients_details
 
     return render(request, 'dashboard/doctor_dash/medical_history.html', context=ctxt)
+
+
+def medicalProfile(request, patient_id):
+    ctxt = {}
+    ctxt['dash_type'] = 'doctor'
+
+
+
+    return render(request, 'dashboard/doctor_dash/patient_profile.html', context=ctxt)
