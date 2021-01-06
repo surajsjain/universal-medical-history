@@ -1,113 +1,283 @@
 {% extends 'dashboard/base.html' %}
 
 {% block MainContent %}
-<form action="#" method="POST">
+    <form action="#" method="POST">
+
+        <div class="row">
 
 
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header">
-                <h1>Basic Details</h1>
+
+            <div class="col-md-6 d-flex">
+                <div class="card">
+                    <div class="card-header">
+                        <h1>Basic Details</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Visit ID</h6>
+                            </div>
+                            <div class="col-md-8">
+                                {{ visit.id }}
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Patient Name</h6>
+                            </div>
+                            <div class="col-md-8">
+                                {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Body Temperature (in Fahrenheit)</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="body_temperature_in_fahrenheit" type="number"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Weight (in kg)</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="weight_in_kilograms" type="number"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Height (in inches)</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="height_in_inches" type="number"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Pulse Rate (in beats per minute)</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="pulse_per_min" type="number"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Blood Pressure</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="blood_pressure" type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Diagnosis</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <input class="form-control" name="diagnosis" type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <h6>Comments</h6>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea name="comments" rows="4" cols="80" class="form-control"
+                                          placeholder="Your observations, symptoms, notes, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card-body">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Tongue and Lip examination (Optional)</h1>
+                            </div>
+                            <div class="card-body">
 
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Visit ID</h6>
-                    </div>
-                    <div class="col-md-8">
-                        {{ visit.id }}
-                    </div>
-                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <h6>Tongue Status</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="tongue_status">
+                                            <option class="form-control" value="" style="color: black"
+                                                    selected>
+                                            </option>
+                                            <option class="form-control" value="Normal" style="color: black">
+                                                Normal
+                                            </option>
+                                            <option class="form-control" value="Pale" style="color: black">
+                                                Pale
+                                            </option>
+                                            <option class="form-control" value="Red" style="color: black">
+                                                Red
+                                            </option>
+                                            <option class="form-control" value="Yellow" style="color: black">
+                                                Yellow
+                                            </option>
+                                            <option class="form-control" value="Yellow" style="color: black">
+                                                Yellow
+                                            </option>
+                                            <option class="form-control" value="Magenta" style="color: black">
+                                                Magenta
+                                            </option>
+                                            <option class="form-control" value="Leukoplakia" style="color: black">
+                                                Leukoplakia
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Patient Name</h6>
-                    </div>
-                    <div class="col-md-8">
-                        {{ visit.patient.first_name }} {{ visit.patient.last_name }}
-                    </div>
-                </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Email</h6>
-                    </div>
-                    <div class="col-md-8">
 
-                    </div>
-                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <h6>Lip Status</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="lip_status">
+                                            <option class="form-control" value="" style="color: black"
+                                                    selected>
+                                            </option>
+                                            <option class="form-control" value="Normal" style="color: black">
+                                                Normal
+                                            </option>
+                                            <option class="form-control" value="Cracked" style="color: black">
+                                                Cracked
+                                            </option>
+                                            <option class="form-control" value="Cheilosis" style="color: black">
+                                                Cheilosis
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Gender</h6>
-                    </div>
-                    <div class="col-md-8">
 
-                    </div>
-                </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>DOB</h6>
-                    </div>
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Blood Group</h6>
-                    </div>
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Occupation</h6>
-                    </div>
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Place</h6>
-                    </div>
-                    <div class="col-md-8">
-
-                    </div>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Father</h6>
-                    </div>
-                    <div class="col-md-8">
-
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-md-4">
-                        <h6>Mother</h6>
-                    </div>
-                    <div class="col-md-8">
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h1>Skin Examination (Optional)</h1>
+                            </div>
+                            <div class="card-body">
+
+
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <h6>Skin Type</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input name="skin_type" type="text" class="form-control"/>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <h6>Skin Color</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="skin_color">
+                                            <option class="form-control" value="" style="color: black"
+                                                    selected>
+                                            </option>
+                                            <option class="form-control" value="Normal" style="color: black">
+                                                Normal
+                                            </option>
+                                            <option class="form-control" value="Pale" style="color: black">
+                                                Pale
+                                            </option>
+                                            <option class="form-control" value="Flushed" style="color: black">
+                                                Flushed
+                                            </option>
+                                            <option class="form-control" value="Cyanosed" style="color: black">
+                                                Cyanosed
+                                            </option>
+                                            <option class="form-control" value="Yellow" style="color: black">
+                                                Yellow
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-4">
+                                        <h6>Skin Pigment</h6>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="skin_pigment">
+                                            <option class="form-control" value="" style="color: black"
+                                                    selected>
+                                            </option>
+                                            <option class="form-control" value="Normal" style="color: black">
+                                                Normal
+                                            </option>
+                                            <option class="form-control" value="Hypopigmentation" style="color: black">
+                                                Hypopigmentation
+                                            </option>
+                                            <option class="form-control" value="Hyperpigmentation" style="color: black">
+                                                Hyperpigmentation
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-body">
+
+                                <div class="row mb-0">
+                                    <div class="col-md-8">
+                                        <h6>Go on to add drug prescriptions, vaccines and prescribe medical tests.</h6>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="submit" value="Continue" class="btn btn-fill btn-primary"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
 
             </div>
+
+
+
         </div>
-    </div>
 
 
-</form>
+    </form>
 {% endblock %}
