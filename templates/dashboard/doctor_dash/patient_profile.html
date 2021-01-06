@@ -2,6 +2,229 @@
 
 {% block MainContent %}
 
+    <div class="row">
+        <div class="col-lg-12 col-md-12 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-11">
+                            Filter
+                        </div>
+                        <div class="col-1">
+                            <a href="{% url 'medical_profile' patient_id=patient_id %}">
+                                <i class="tim-icons icon-refresh-01"> Reset</i>
+                            </a>
 
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-3 px-md-1 mt-1">
+                                <select class="form-control" name="category">
+                                    <option class="form-control" value="doctor" style="color: black">Doctor</option>
+                                    <option class="form-control" value="purpose" style="color: black">Purpose</option>
+                                    <option class="form-control" value="diagnosis" style="color: black">Diagnosis</option>
+                                    <option class="form-control" value="drug" style="color: black">Drug Prescriptions</option>
+                                    <option class="form-control" value="medical_test" style="color: black">Medical Tests</option>
+                                    <option class="form-control" value="vaccine" style="color: black">Vaccine</option>
+                                </select>
+                            </div>
+                            <div class="col-md-7 px-md-1 mt-1">
+                                <input type="text" class="form-control" placeholder="Ex: Joe or COVID"
+                                       name="search_term">
+                            </div>
+                            <div class="col-md-2 px-md-1">
+                                <input type="submit" value="Search" class="btn btn-fill btn-info">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Basic Details</h1>
+                </div>
+
+                <div class="card-body">
+
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>ID</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.user.id }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Name</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.user.first_name }} {{ patient_details.user.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Email</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.user.email }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Gender</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.gender }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>DOB</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.date_of_birth }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Blood Group</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.blood_group }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Occupation</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.occupation }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Place</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {{ patient_details.city }}, {{ patient_details.iso_country_code }}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Father</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {% if patient_details.father != None %}
+                                <a href="{% url 'medical_profile' patient_id=patient_details.father %}">View Details</a>
+                            {% else %}
+                                User not available
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <h6>Mother</h6>
+                        </div>
+                        <div class="col-md-8">
+                            {% if patient_details.mother != None %}
+                                <a href="{% url 'medical_profile' patient_id=patient_details.mother %}">View Details</a>
+                            {% else %}
+                                User not available
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Table -->
+        <div class="col-md-8">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">Patient's Previous Doctor Visits</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Visit ID
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                                <th>
+                                    Doctor
+                                </th>
+                                <th class="text-center">
+                                    Purpose
+                                </th>
+                                <th class="text-center">
+                                    Diagnosis
+                                </th>
+                                <th>
+                                    Details
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for visit in visits %}
+                                <tr>
+                                    <td>
+                                        {{ visit.id }}
+                                    </td>
+                                    <td>
+                                        {{ visit.date_time.date }}
+                                    </td>
+                                    <td>
+                                        {{ visit.date_time.time }}
+                                    </td>
+                                    <td>
+                                        {{ visit.doctor.first_name }} {{ visit.doctor.last_name }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ visit.purpose }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ visit.diagnosis }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'visit_details' visit_id=visit.id viewer=1 %}">Details</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

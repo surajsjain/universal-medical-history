@@ -112,6 +112,41 @@ def medicalProfile(request, patient_id):
     ctxt = {}
     ctxt['dash_type'] = 'doctor'
 
+    ctxt['patient_id'] = patient_id
 
+    patient_details = UserDetails.objects.get(user__id=patient_id)
+    ctxt['patient_details'] = patient_details
+    doc_visits = Visit.objects.filter(Q(patient__id=patient_id) & Q(completed=True))
+
+    if(request.method == 'POST'):
+        data = request.POST
+
+        if (data['category'] == 'doctor'):
+            doc_visits = Visit.objects.filter(Q(patient__id=patient_id) & Q(completed=True) & Q(
+                Q(doctor__username__icontains=data['search_term']) | Q(
+                    doctor__first_name__icontains=data['search_term']) | Q(
+                    doctor__last_name__icontains=data['search_term'])))
+        elif (data['category'] == 'purpose'):
+            doc_visits = Visit.objects.filter(
+                Q(patient__id=patient_id) & Q(completed=True) & Q(purpose__icontains=data['search_term']))
+        elif (data['category'] == 'diagnosis'):
+            doc_visits = Visit.objects.filter(
+                Q(patient__id=patient_id) & Q(completed=True) & Q(diagnosis__icontains=data['search_term']))
+
+        elif(data['category'] == 'drug'):
+            dv = DrugPrescription.objects.filter(Q(name__icontains=data['search_term']) & Q(visit__patient__id=patient_id)).values('visit').distinct()
+            doc_visits = Visit.objects.filter(id__in=dv)
+
+        elif (data['category'] == 'medical_test'):
+            dv = TestPrescription.objects.filter(
+                Q(name__icontains=data['search_term']) & Q(visit__patient__id=patient_id)).values('visit').distinct()
+            doc_visits = Visit.objects.filter(id__in=dv)
+
+        elif (data['category'] == 'vaccine'):
+            dv = Vaccine.objects.filter(
+                Q(name__icontains=data['search_term']) & Q(visit__patient__id=patient_id)).values('visit').distinct()
+            doc_visits = Visit.objects.filter(id__in=dv)
+
+    ctxt['visits'] = doc_visits
 
     return render(request, 'dashboard/doctor_dash/patient_profile.html', context=ctxt)
