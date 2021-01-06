@@ -1,7 +1,113 @@
 {% extends 'dashboard/base.html' %}
 
 {% block MainContent %}
+<form action="#" method="POST">
 
 
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h1>Basic Details</h1>
+            </div>
 
+            <div class="card-body">
+
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Visit ID</h6>
+                    </div>
+                    <div class="col-md-8">
+                        {{ visit.id }}
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Patient Name</h6>
+                    </div>
+                    <div class="col-md-8">
+                        {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Email</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Gender</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>DOB</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Blood Group</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Occupation</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Place</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Father</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <h6>Mother</h6>
+                    </div>
+                    <div class="col-md-8">
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</form>
 {% endblock %}

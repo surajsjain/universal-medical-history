@@ -157,6 +157,7 @@ def appointmentFilling(request, visit_id):
     ctxt = {}
     ctxt['dash_type'] = 'doctor'
     ctxt['visit_id'] = visit_id
+    ctxt['visit'] = Visit.objects.get(id=visit_id)
 
     if(request.method == 'GET'):
         return render(request, 'dashboard/doctor_dash/appointment_filling.html', context=ctxt)
