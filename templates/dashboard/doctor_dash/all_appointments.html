@@ -116,7 +116,7 @@
                                 </td>
                                 <td>
                                     {% if visit.completed != True %}
-                                    <a href="#" class="btn btn-fill btn-primary">Attend</a>
+                                    <a href="{% url 'visit_filling' visit_id=visit.id %}" class="btn btn-fill btn-primary">Attend</a>
                                     {% else %}
                                     <a href="{% url 'visit_details' visit_id=visit.id viewer=1 %}" class="btn btn-fill btn-success">View Details</a>
                                     {% endif %}

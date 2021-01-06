@@ -88,7 +88,7 @@
                                     <p>"{{ visit.purpose }}"</p>
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-fill btn-primary">Attend</a>
+                                    <a href="{% url 'visit_filling' visit_id=visit.id %}" class="btn btn-fill btn-primary">Attend</a>
                                 </td>
                             </tr>
                             {% endfor %}

@@ -150,3 +150,31 @@ def medicalProfile(request, patient_id):
     ctxt['visits'] = doc_visits
 
     return render(request, 'dashboard/doctor_dash/patient_profile.html', context=ctxt)
+
+
+
+def appointmentFilling(request, visit_id):
+    ctxt = {}
+    ctxt['dash_type'] = 'doctor'
+    ctxt['visit_id'] = visit_id
+
+    if(request.method == 'GET'):
+        return render(request, 'dashboard/doctor_dash/appointment_filling.html', context=ctxt)
+
+    elif(request.method == 'POST'):
+        pass #TODO: Redirect to fill in prescriptions, tests and vaccines
+
+
+def prescription_filling(request, visit_id):
+    ctxt = {}
+    ctxt['dash_type'] = 'doctor'
+    ctxt['visit_id'] = visit_id
+
+    if (request.method == 'GET'):
+
+        #TODO: Query Prescriptions, tests and vaccines
+
+        return render(request, 'dashboard/doctor_dash/prescription_filling.html', context=ctxt)
+
+    elif(request.method == 'POST'):
+        pass #TODO: Render the same thing with prescriptions till now
