@@ -11,7 +11,7 @@
                             Filter
                         </div>
                         <div class="col-1">
-                            <a href="{% url 'doc_search' %}">
+                            <a href="{% url 'dd_mainDash' %}">
                                 <i class="tim-icons icon-refresh-01"> Reset</i>
                             </a>
                         </div>
@@ -50,7 +50,7 @@
         <div class="col-md-12">
             <div class="card ">
                 <div class="card-header">
-                    <h4 class="card-title">Your Appointments Today</h4>
+                    <h4 class="card-title">Your Incomplete Appointments Today</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -64,7 +64,7 @@
                                     Time
                                 </th>
                                 <th>
-                                    Patient
+                                    Patient Name
                                 </th>
                                 <th class="text-center">
                                     Purpose
@@ -73,14 +73,25 @@
                             </thead>
                             <tbody>
 
+                            {% for visit in visits %}
                             <tr>
                                 <td>
-                                    1
+                                    {{ visit.id }}
                                 </td>
                                 <td>
-                                    <a href="#">Attend</a>
+                                    {{ visit.date_time.time }}
+                                </td>
+                                <td>
+                                    {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                                </td>
+                                <td class="text-center">
+                                    <p>"{{ visit.purpose }}"</p>
+                                </td>
+                                <td>
+                                    <a href="#" class="btn btn-fill btn-primary">Attend</a>
                                 </td>
                             </tr>
+                            {% endfor %}
 
                             </tbody>
                         </table>
