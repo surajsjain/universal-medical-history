@@ -34,8 +34,6 @@ def mainDash(request):
             pending_tests.append(test)
     ctxt['test_prescriptions'] = pending_tests
 
-    print(ctxt)
-
     return render(request, 'dashboard/user_dash/index.html', context=ctxt)
 
 
