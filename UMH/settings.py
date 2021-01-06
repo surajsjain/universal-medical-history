@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'usermgmt.apps.UsermgmtConfig',
     'medical_visit.apps.MedicalVisitConfig',
     'user_dash.apps.UserDashConfig',
+    'doctor_dash.apps.DoctorDashConfig',
 ]
 
 MIDDLEWARE = [

@@ -141,7 +141,13 @@
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="javascript:void(0)">User Dashboard</a>
+
+                        {% if dash_type == 'user' %}
+                        <a class="navbar-brand" href="{% url 'ud_mainDash' %}">User Dashboard</a>
+                        {% else %}
+                        <a class="navbar-brand" href="javascript:void(0)">Doctor Dashboard</a>
+                        {% endif %}
+
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                         aria-expanded="false" aria-label="Toggle navigation">

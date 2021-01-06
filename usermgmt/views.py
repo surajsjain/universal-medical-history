@@ -8,10 +8,18 @@ from .models import UserDetails
 def login(request):
     if request.method == 'GET':
         if(request.user.is_authenticated):
-            # TODO: Check the user type (Doctor or Regular user) and redirect accordingly
-            return redirect('ud_mainDash')
+            redirect_dest = 'ud_mainDash'
+            u_det = UserDetails.objects.get(user=request.user)
+            if(u_det.is_doctor):
+                redirect_dest = 'dd_mainDash'
+
+            return redirect(redirect_dest)
+
+
         else:
             return render(request, 'auth/login.html')
+
+
 
     elif request.method == 'POST':
         data = request.POST
@@ -23,13 +31,21 @@ def login(request):
             user = User.objects.get(email=email)
             if user.check_password(password):
                 auth.login(request, user)
-                return redirect('ud_mainDash') # TODO: Check the user type (Doctor or Regular user) and redirect accordingly
+
+                redirect_dest = 'ud_mainDash'
+                u_det = UserDetails.objects.get(user=user)
+                if (u_det.is_doctor):
+                    redirect_dest = 'dd_mainDash'
+
+                return redirect(redirect_dest)
             else:
                 return redirect('login')
 
         except:
             print('could not get the user')
             return redirect('login')
+
+
 
 def logout(request):
     if(request.method == 'POST'):
