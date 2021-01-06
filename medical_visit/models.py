@@ -19,7 +19,7 @@ class GeneralCheckup(models.Model):
     height_in_inches = models.FloatField(blank=True)
 
     pulse_per_min = models.IntegerField(blank=True, null=True, default=None)
-    blood_pressure = models.IntegerField(blank=True, null=True, default=None)
+    blood_pressure = models.CharField(blank=True, null=True, default=None, max_length=10)
 
     comments = models.CharField(max_length=2000, blank=True, default='')
 
