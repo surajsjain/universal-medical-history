@@ -2,6 +2,134 @@
 
 {% block MainContent %}
 
-    
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-11">
+                            Filter
+                        </div>
+                        <div class="col-1">
+                            <a href="{% url 'all_appointments' %}">
+                                <i class="tim-icons icon-refresh-01"> Reset</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-2 px-md-1 mt-1">
+                                <select class="form-control" name="category">
+                                    <option class="form-control" value="patient_name" style="color: black" selected>
+                                        Patient Name
+                                    </option>
+                                    <option class="form-control" value="purpose" style="color: black">
+                                        Purpose
+                                    </option>
+                                    <option class="form-control" value="diagnosis" style="color: black">
+                                        Diagnosis
+                                    </option>
+                                    <option class="form-control" value="diagnosis" style="color: black">
+                                        Date Only
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 px-md-1 mt-1">
+                                <input type="text" class="form-control" placeholder="Ex: Joe, or Stomachache"
+                                       name="search_term">
+                            </div>
+                            <div class="col-md-3 px-md-1 mt-1">
+                                <input type="date" name="visit_date" class="form-control"/>
+                            </div>
+                            <div class="col-md-2 px-md-1">
+                                <input type="submit" value="Search" class="btn btn-fill btn-info">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="card-title">All your appointments (including previous and upcoming visits)</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table tablesorter " id="">
+                            <thead class=" text-primary">
+                            <tr>
+                                <th>
+                                    Visit ID
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+                                <th>
+                                    Patient Name
+                                </th>
+                                <th class="text-center">
+                                    Purpose
+                                </th>
+                                <th class="text-center">
+                                    Diagnosis
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for visit in visits %}
+                            <tr>
+                                <td>
+                                    {{ visit.id }}
+                                </td>
+                                <td>
+                                    {{ visit.date_time.date }}
+                                </td>
+                                <td>
+                                    {{ visit.date_time.time }}
+                                </td>
+                                <td>
+                                    {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                                </td>
+                                <td class="text-center">
+                                    <p>"{{ visit.purpose }}"</p>
+                                </td>
+                                <td class="text-center">
+                                    <p>
+                                        {% if visit.diagnosis != '' %}
+                                        {{ visit.diagnosis }}
+                                        {% else %}
+                                        N/A
+                                        {% endif %}
+                                    </p>
+                                </td>
+                                <td>
+                                    {% if visit.completed != True %}
+                                    <a href="#" class="btn btn-fill btn-primary">Attend</a>
+                                    {% else %}
+                                    <a href="{% url 'visit_details' visit_id=visit.id viewer=1 %}" class="btn btn-fill btn-success">View Details</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

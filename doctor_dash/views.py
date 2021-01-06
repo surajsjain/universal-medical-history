@@ -44,6 +44,39 @@ def allAppointments(request):
     ctxt['dash_type'] = 'doctor'
     ctxt['active'] = 'all_appointments'
 
+
+    if (request.method == "GET"):
+        visits = Visit.objects.filter(Q(doctor=request.user))
+
+    elif (request.method == "POST"):
+        data = request.POST
+
+
+        if (data['category'] == 'patient_name'):
+            visits = Visit.objects.filter(
+                Q(doctor=request.user) & Q(
+                    Q(patient__first_name__icontains=data['search_term']) | Q(
+                        patient__last_name__icontains=data['search_term']) | Q(
+                        patient__username__icontains=data['search_term'])))
+
+
+        elif (data['category'] == 'purpose'):
+            visits = Visit.objects.filter(
+                Q(doctor=request.user) & Q(
+                    purpose__icontains=data['search_term']))
+
+        elif (data['category'] == 'diagnosis'):
+            visits = Visit.objects.filter(
+                Q(doctor=request.user) & Q(
+                    diagnosis__icontains=data['search_term']))
+
+
+        if(data['visit_date'] != ''):
+            visits = visits.filter(date_time__date=data['visit_date'])
+
+
+    ctxt['visits'] = visits.order_by('-date_time')
+
     return render(request, 'dashboard/doctor_dash/all_appointments.html', context=ctxt)
 
 
