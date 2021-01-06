@@ -160,3 +160,24 @@ def visit_details(request, visit_id, viewer):
     ctxt['test_prescriptions'] = TestPrescription.objects.filter(visit__id=visit_id)
 
     return render(request, 'dashboard/common_pages/visit_details.html', context=ctxt)
+
+
+def test_prescription_report_upload(request, test_prescription_id):
+    ctxt = {}
+    ctxt['dash_type'] = 'user'
+
+    if(request.method == 'GET'):
+
+        ctxt['test_prescription_id'] = test_prescription_id
+
+        return render(request, 'dashboard/user_dash/report_upload.html', context=ctxt)
+
+    elif(request.method == 'POST'):
+
+        data = request.POST
+        medical_test = TestPrescription.objects.get(id=data['test_id'])
+        medical_test.report = data['report']
+
+        medical_test.save()
+
+        return redirect('ud_mainDash')

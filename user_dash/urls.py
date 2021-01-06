@@ -7,4 +7,5 @@ urlpatterns = [
     path('prev_visits/<int:visit_id>/<int:viewer>/', views.visit_details, name='visit_details'), #Viewer: 0 for user and 1 for doctor
     path('doctor_search/', views.doctor_search, name='doc_search'),
     path('doctor_search/<int:doctor_id>/', views.book_visit, name='doc_details'),
+    path('test_report_upload/<int:test_prescription_id>/', views.test_prescription_report_upload, name='test_report_upload'),
 ]

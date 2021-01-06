@@ -1,0 +1,23 @@
+{% extends 'dashboard/base.html' %}
+
+{% block MainContent %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Upload the report for test #{{ test_prescription_id }}</h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="test_id" value="{{ test_prescription_id }}">
+                        <input type="file" name="report">
+                        <input type="submit" value="Upload" class="btn btn-fill btn-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

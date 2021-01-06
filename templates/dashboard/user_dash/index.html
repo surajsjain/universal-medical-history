@@ -141,7 +141,7 @@
                                             {{ test.name }}
                                         </td>
                                         <td>
-                                            <a href="#" style="color: #00f2c3;">Upload Report</a>
+                                            <a href="{% url 'test_report_upload' test_prescription_id=test.id %}" style="color: #00f2c3;">Upload Report</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
