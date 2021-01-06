@@ -123,6 +123,43 @@
                         </a>
                     </li>
 
+                {% else %}
+
+                    <li class="
+                        {% if active == 'today_appointments' %}
+                            active
+                        {% endif %}
+                    ">
+                        <a href="{% url 'dd_mainDash' %}">
+                            <i class="tim-icons icon-watch-time"></i>
+                            <p>Your appointments today</p>
+                        </a>
+                    </li>
+
+
+                    <li class="
+                        {% if active == 'all_appointments' %}
+                            active
+                        {% endif %}
+                    ">
+                        <a href="{% url 'all_appointments' %}">
+                            <i class="tim-icons icon-calendar-60"></i>
+                            <p>All appointments</p>
+                        </a>
+                    </li>
+
+
+                    <li class="
+                        {% if active == 'medical_history' %}
+                            active
+                        {% endif %}
+                    ">
+                        <a href="{% url 'patient_medical_history' %}">
+                            <i class="tim-icons icon-zoom-split"></i>
+                            <p>Medical History</p>
+                        </a>
+                    </li>
+
                 {% endif %}
 
 
