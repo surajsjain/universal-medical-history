@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-1">
                             <h4>Visit ID: {{ visit.id }}</h4>
                         </div>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-1">
                             <h5>Address</h5>
                         </div>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row mb-2">
                         <div class="col-md-1">
                             <h5>Purpose</h5>
                         </div>
@@ -71,4 +71,286 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+
+        <div class="col-md-7 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>General check-up details</h1>
+                </div>
+                <div class="card-body">
+
+                    {% if general_checkup != None %}
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <h6>Body Temperature</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {{ general_checkup.body_temperature_in_fahrenheit }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <h6>Weight (in kilograms)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {{ general_checkup.weight_in_kilograms }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <h6>Height (in inches)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {{ general_checkup.height_in_inches }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <h6>Pulse Rate (per min.)</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {{ general_checkup.pulse_per_min }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-3">
+                                <h6>Blood Pressure</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    {{ general_checkup.blood_pressure }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6>Doctor Coments:</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <p>
+                                    "{{ general_checkup.comments }}"
+                                </p>
+                            </div>
+                        </div>
+                    {% else %}
+                        General check-up was not performed during this visit.
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>
+                        Drug Prescriptions
+                    </h1>
+                </div>
+                <div class="card-body">
+                    {% if drug_prescriptions|length == 0 %}
+                        There are no drug prescriptions
+                    {% else %}
+                        <div class="col-md-12">
+                            <div class="table">
+                                <table class="table tablesorter">
+                                    <thead class="text-primary">
+                                    <tr>
+                                        <th>
+                                            Name
+                                        </th>
+                                        <th>
+                                            Dosage
+                                        </th>
+                                        <th>
+                                            Frequency
+                                        </th>
+                                        <th>
+                                            Duration
+                                        </th>
+                                        <th>
+                                            Comment
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for prescription in drug_prescriptions %}
+                                        <tr>
+                                            <td>{{ prescription.name }}</td>
+                                            <td>{{ prescription.dosage }}</td>
+                                            <td>{{ prescription.frequency_per_day }}</td>
+                                            <td>{{ prescription.duration_in_days }}</td>
+                                            <td>{{ prescription.comments }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Tongue and Lip</h1>
+                </div>
+                <div class="card-body">
+
+                    {% if tongue_and_lip_examination != None %}
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <h6>Tongue</h6>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    {{ tongue_and_lip_examination.tongue_status }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <h6>Lip</h6>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    {{ tongue_and_lip_examination.lip_status }}
+                                </p>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        Tongue and Lip check-up was not performed during this visit.
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Skin</h1>
+                </div>
+                <div class="card-body">
+                    {% if skin_examination != None %}
+
+                        <div class="row mb-1">
+                            <div class="col-md-4">
+                                <h6>Skin Type</h6>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    {{ skin_examination.skin_type }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-1">
+                            <div class="col-md-4">
+                                <h6>Skin Color</h6>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    {{ skin_examination.skin_color }}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Skin Pigment</h6>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    {{ skin_examination.skin_pigment }}
+                                </p>
+                            </div>
+                        </div>
+
+                    {% else %}
+                        Skin examination was not performed during this visit.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Vaccinations</h1>
+                </div>
+                <div class="card-body">
+                    {% if vaccinations|length != 0 %}
+                        <ol>
+                            {% for vaccine in vaccinations %}
+                                <li>{{ vaccine.name }}</li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        There were no vaccinations given during this visit.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Medical Tests</h1>
+                </div>
+                <div class="card-body">
+                    {% if test_prescriptions|length != 0 %}
+
+                        {% for test_prescription in test_prescriptions %}
+                        <div class="row mb-1">
+                            <div class="col-md-4">
+                                <h6>{{ test_prescription.name }}</h6>
+                            </div>
+                            <div class="col-md-7">
+                                {% if test_prescription.report %}
+                                <a href="{{ test_prescription.report.url }}">Download Report</a>
+                                {% else %}
+                                Report Not availavle
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    {% else %}
+                        There were no medical tests prescribed during this visit.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
 {% endblock %}

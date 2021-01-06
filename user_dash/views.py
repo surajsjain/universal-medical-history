@@ -151,6 +151,11 @@ def visit_details(request, visit_id, viewer):
     except:
         ctxt['skin_examination'] = None
 
+    try:
+        ctxt['tongue_and_lip_examination'] = TongueAndLipExamination.objects.get(visit__id=visit_id)
+    except:
+        ctxt['tongue_and_lip_examination'] = None
+
     # Will return an array
     ctxt['vaccinations'] = Vaccine.objects.filter(visit__id=visit_id)
     ctxt['drug_prescriptions'] = DrugPrescription.objects.filter(visit__id=visit_id)
