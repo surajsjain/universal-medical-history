@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from medical_visit.models import *
 from usermgmt.models import UserDetails
@@ -157,13 +157,48 @@ def appointmentFilling(request, visit_id):
     ctxt = {}
     ctxt['dash_type'] = 'doctor'
     ctxt['visit_id'] = visit_id
-    ctxt['visit'] = Visit.objects.get(id=visit_id)
+    visit = Visit.objects.get(id=visit_id)
+    ctxt['visit'] = visit
 
     if(request.method == 'GET'):
         return render(request, 'dashboard/doctor_dash/appointment_filling.html', context=ctxt)
 
     elif(request.method == 'POST'):
-        pass #TODO: Redirect to fill in prescriptions, tests and vaccines
+
+        data = request.POST
+
+        print('\n\nGot the form: \n'+str(data)+'\n\n')
+
+        visit.diagnosis = data['diagnosis']
+        visit.save()
+
+        general_checkup = GeneralCheckup()
+        general_checkup.visit = visit
+        general_checkup.body_temperature_in_fahrenheit = data['body_temperature_in_fahrenheit']
+        general_checkup.weight_in_kilograms = data['weight_in_kilograms']
+        general_checkup.height_in_inches = data['height_in_inches']
+        general_checkup.pulse_per_min = data['pulse_per_min']
+        general_checkup.blood_pressure = data['blood_pressure']
+        general_checkup.comments = data['comments']
+        general_checkup.save()
+
+
+        tongue_and_lip_examination = TongueAndLipExamination()
+        tongue_and_lip_examination.visit = visit
+        tongue_and_lip_examination.tongue_status = data['tongue_status']
+        tongue_and_lip_examination.lip_status = data['lip_status']
+        tongue_and_lip_examination.save()
+
+
+        skin_examination = SkinExamination()
+        skin_examination.visit = visit
+        skin_examination.skin_type = data['skin_type']
+        skin_examination.skin_pigment = data['skin_pigment']
+        skin_examination.skin_color = data['skin_color']
+        skin_examination.save()
+
+
+        return redirect('prescription_filling', visit_id=visit_id)
 
 
 def prescription_filling(request, visit_id):
@@ -171,11 +206,44 @@ def prescription_filling(request, visit_id):
     ctxt['dash_type'] = 'doctor'
     ctxt['visit_id'] = visit_id
 
+    ctxt['drug_prescriptions'] = DrugPrescription.objects.filter(visit__id=visit_id)
+    ctxt['test_prescriptions'] = TestPrescription.objects.filter(visit_id=visit_id)
+    ctxt['vaccines'] = Vaccine.objects.filter(visit_id=visit_id)
+
     if (request.method == 'GET'):
-
-        #TODO: Query Prescriptions, tests and vaccines
-
         return render(request, 'dashboard/doctor_dash/prescription_filling.html', context=ctxt)
 
     elif(request.method == 'POST'):
-        pass #TODO: Render the same thing with prescriptions till now
+        data = request.POST
+
+        visit = Visit.objects.get(id=visit_id)
+
+        if(data['sub_type'] == 'drug_prescription'):
+            dp = DrugPrescription()
+            dp.visit = visit
+            dp.name = data['name']
+            dp.dosage = data['dosage']
+            dp.frequency_per_day = data['frequency_per_day']
+            dp.duration_in_days = data['duration_in_days']
+            dp.comments = data['comments']
+            dp.save()
+            return redirect('prescription_filling', visit_id=visit_id)
+
+        elif(data['sub_type'] == 'test_prescription'):
+            tp = TestPrescription()
+            tp.visit = visit
+            tp.name = data['name']
+            tp.save()
+            return redirect('prescription_filling', visit_id=visit_id)
+
+        elif(data['sub_type'] == 'vaccine'):
+            vac = Vaccine()
+            vac.visit = visit
+            vac.name = data['name']
+            vac.save()
+            return redirect('prescription_filling', visit_id=visit_id)
+
+        elif(data['sub_type'] == 'finish_visit'):
+            visit.completed = True
+            visit.save()
+            return redirect('dd_mainDash')

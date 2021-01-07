@@ -2,6 +2,239 @@
 
 {% block MainContent %}
 
+    <div class="row">
 
+        <div class="col-md-6 d-flex h-100">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sub_type" value="drug_prescription">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add a drug prescription</h2>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="table">
+                            <table class="table tablesorter ">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Dosage
+                                    </th>
+                                    <th>
+                                        Frequency (Times Per Day)
+                                    </th>
+                                    <th>
+                                        Duration (No. of days)
+                                    </th>
+                                    <th>
+                                        Comments
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" name="name" size="40"/>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="dosage"/>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="frequency_per_day"/>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="duration_in_days"/>
+                                    </td>
+                                    <td>
+                                            <textarea name="comments" rows="4" cols="40" class="form-control"
+                                                      placeholder="How sould it be taken and stuff"></textarea>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Add to Prescriptions" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-md-3 d-flex h-100">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sub_type" value="test_prescription">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Test Prescription</h2>
+                        <p>Do you want the patient to get any medical tests done?</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Enter the name of the test</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Prescribe Test" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-md-3 d-flex h-100">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sub_type" value="vaccine">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Vaccines</h2>
+                        <p>Do you vaccine during the visit?</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="name">Enter the name of the vaccine</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" value="Add Vaccine" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-6 d-flex">
+
+            <input type="hidden" name="sub_type" value="prescription">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Drug Prescriptions</h1>
+                </div>
+                <div class="card-body">
+                    {% if drug_prescriptions|length != 0 %}
+                        <div class="table-responsive">
+                            <table class="table tablesorter ">
+                                <thead class=" text-primary">
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Dosage
+                                    </th>
+                                    <th>
+                                        Frequency (Times Per Day)
+                                    </th>
+                                    <th>
+                                        Duration (No. of days)
+                                    </th>
+                                    <th>
+                                        Comments
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for prescription in drug_prescriptions %}
+                                    <tr>
+                                        <td>
+                                            {{ prescription.name }}
+                                        </td>
+                                        <td>
+                                            {{ prescription.dosage }}
+                                        </td>
+                                        <td>
+                                            {{ prescription.frequency_per_day }}
+                                        </td>
+                                        <td>
+                                            {{ prescription.duration_in_days }}
+                                        </td>
+                                        <td>
+                                            <p>"{{ prescription.comments }}"</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>There are no drugs prescribed.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Medical Tests</h1>
+                </div>
+                <div class="card-body">
+                    {% if test_prescriptions|length != 0 %}
+                        <ol>
+                            {% for tp in test_prescriptions %}
+                                <li>
+                                    {{ tp.name }}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p>
+                            There are no tests prescribed.
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 d-flex">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Vaccines given</h1>
+                </div>
+                <div class="card-body">
+                    {% if vaccines|length != 0 %}
+                        <ol>
+                            {% for vaccine in vaccines %}
+                                <li>{{ vaccine.name }}</li>
+                            {% endfor %}
+                        </ol>
+                    {% else %}
+                        <p>There are no vaccines added.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+
+        </div>
+        <div class="col-md-2">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="sub_type" value="finish_visit">
+                <input type="submit" value="Finish Visit" class="btn btn-success">
+            </form>
+        </div>
+    </div>
 
 {% endblock %}
