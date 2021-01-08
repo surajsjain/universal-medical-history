@@ -149,3 +149,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media Stuff
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+
+
+# Filecoin Stuff
+SLATE_ID = os.getenv('SLATE_ID')
+SLATE_AUTH_CODE = os.getenv('SLATE_AUTH_CODE')
