@@ -100,7 +100,7 @@
                                     {{ visit.date_time.time }}
                                 </td>
                                 <td>
-                                    {{ visit.patient.first_name }} {{ visit.patient.last_name }}
+                                    <a href="{% url 'medical_profile' patient_id=visit.patient.id %}" target="_blank">{{ visit.patient.first_name }} {{ visit.patient.last_name }}</a>
                                 </td>
                                 <td class="text-center">
                                     <p>"{{ visit.purpose }}"</p>
