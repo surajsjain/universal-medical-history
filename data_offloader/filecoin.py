@@ -5,7 +5,7 @@ def upload(file_to_upload, id=settings.SLATE_ID, auth_code=settings.SLATE_AUTH_C
         url = 'https://uploads.slate.host/api/public/' + id
         auth_request = 'Basic ' + str(auth_code)
         headers = {'Authorization': auth_request}
-        files = {'media': open(file_to_upload, 'rb')}
+        files = {'media': file_to_upload}
         # print("HERE")
         response = requests.post(url=url,headers = headers,files = files)
         return response.json()["url"]

@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
+import os
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
 from medical_visit.models import *
 from usermgmt.models import UserDetails
+from data_offloader.filecoin import upload
 
 
 # Create your views here.
@@ -27,11 +29,9 @@ def mainDash(request):
     test_prescriptions = TestPrescription.objects.filter(visit__patient=request.user)
     pending_tests = []
     for test in test_prescriptions:
-        try:
-            report = test.report
-            url = report.url
-        except:
+        if(test.report_url == '' or test.report_url == None):
             pending_tests.append(test)
+
     ctxt['test_prescriptions'] = pending_tests
 
     return render(request, 'dashboard/user_dash/index.html', context=ctxt)
@@ -173,10 +173,17 @@ def test_prescription_report_upload(request, test_prescription_id):
         return render(request, 'dashboard/user_dash/report_upload.html', context=ctxt)
 
     elif(request.method == 'POST'):
-
         data = request.POST
         medical_test = TestPrescription.objects.get(id=data['test_id'])
-        medical_test.report = data['report']
+        report_file = request.FILES['report']
+
+        new_file_name = 'test_' + str(test_prescription_id) + '_report.pdf'
+        report_file.name = new_file_name
+
+        uploaded_report_url = upload(report_file)
+        medical_test.report_url = uploaded_report_url
+
+
 
         medical_test.save()
 

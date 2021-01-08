@@ -9,10 +9,11 @@
                     <h2>Upload the report for test #{{ test_prescription_id }}</h2>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="hidden" name="test_id" value="{{ test_prescription_id }}">
-                        <input type="file" name="report">
+                        <input type="file" name="report" enctype="multipart/form-data" id="uploadedReport"
+                               onchange="fileRenameFunction()" accept="application/pdf">
                         <input type="submit" value="Upload" class="btn btn-fill btn-primary">
                     </form>
                 </div>
@@ -20,4 +21,32 @@
         </div>
     </div>
 
+{% endblock %}
+
+
+
+{% block ExtraScripts %}
+    <script>
+        var uploadedReport = document.getElementById("uploadedReport");
+        var visit_id = {{ test_prescription_id }};
+
+        function fileRenameFunction() {
+
+            {#var blob = file.slice(0, file.size, 'application/pdf');#}
+            var filename = 'report_testid_' + visit_id;
+            uploadedReport.files[0].name = filename;
+            {#var newFile = new File([blob], filename, {type: 'application/pdf'});#}
+            {#uploadedReport.files[0] = newFile;#}
+
+            console.log(uploadedReport.files)
+        }
+
+        function renameFile(originalFile, newName) {
+            return new File([originalFile], newName, {
+                type: originalFile.type,
+                lastModified: originalFile.lastModified,
+            });
+        }
+
+    </script>
 {% endblock %}

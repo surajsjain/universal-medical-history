@@ -141,7 +141,7 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <h6>Doctor Coments:</h6>
+                                <h6>Doctor Comments:</h6>
                             </div>
                             <div class="col-md-6">
                                 <p>
@@ -333,10 +333,10 @@
                                 <h6>{{ test_prescription.name }}</h6>
                             </div>
                             <div class="col-md-7">
-                                {% if test_prescription.report %}
-                                <a href="{{ test_prescription.report.url }}">Download Report</a>
+                                {% if test_prescription.report_url != '' %}
+                                <a href="{{ test_prescription.report_url }}">Download Report</a>
                                 {% else %}
-                                Report Not availavle
+                                Report Not available
                                 {% endif %}
                             </div>
                         </div>
