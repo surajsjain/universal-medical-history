@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'medical_visit.apps.MedicalVisitConfig',
     'user_dash.apps.UserDashConfig',
     'doctor_dash.apps.DoctorDashConfig',
+    'data_offloader.apps.DataOffloaderConfig',
 ]
 
 MIDDLEWARE = [
