@@ -17,7 +17,7 @@ def create_pool(ocean, token_address, alice_wallet):
 
     return pool
 
-def publish_excel(pvt_key, url, dt_name, dt_symbol, price):
+def publish_excel(pvt_key, url, dt_name, dt_symbol):
     config = {
        'network' : os.getenv('NETWORK_URL'),
        'metadataStoreUri' : os.getenv('AQUARIUS_URL'),
@@ -110,7 +110,7 @@ def publish_excel(pvt_key, url, dt_name, dt_symbol, price):
 
     OCEAN_address = market_ocean.OCEAN_address
     price_in_OCEAN = market_ocean.pool.calcInGivenOut(
-        pool_address, OCEAN_address, token_address, token_out_amount=price)
+        pool_address, OCEAN_address, token_address, token_out_amount=1.0)
     print(f"Price of 1 datatoken is {price_in_OCEAN} OCEAN")
 
     return did

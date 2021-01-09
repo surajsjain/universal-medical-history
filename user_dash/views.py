@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import os
+from random import randint
 
 from django.db.models import Q
 from django.shortcuts import render, redirect
@@ -7,6 +8,9 @@ from django.shortcuts import render, redirect
 from medical_visit.models import *
 from usermgmt.models import UserDetails
 from data_offloader.filecoin import upload
+
+from data_offloader.data_snapshot import snapshot_user_data
+from data_offloader.ocean_script import publish_excel
 
 
 # Create your views here.
@@ -188,3 +192,26 @@ def test_prescription_report_upload(request, test_prescription_id):
         medical_test.save()
 
         return redirect('ud_mainDash')
+
+
+def sell_data(request):
+    ctxt = {}
+    ctxt['dash_type'] = 'user'
+    ctxt['published'] = False
+
+    if(request.method == 'POST'):
+        data = request.POST
+
+        url = snapshot_user_data(request.user, data['month'], data['year'])
+
+        dt_name = "User" + str(request.user.id) + "_" + str(data["month"]) + "_" + str(data['year'])
+        dt_symbol = "UMH-" + str(request.user.id) + "-" + str(data["month"]) + "-" + str(data['year']) + '-' + str(randint(0, 100))
+
+        did = publish_excel(data['private_key'], url, dt_name, dt_symbol)
+
+        ctxt['did'] = did
+        ctxt['dt_symbol'] = dt_symbol
+        ctxt['published'] = True
+
+
+    return render(request, 'dashboard/user_dash/sell_data.html', context=ctxt)

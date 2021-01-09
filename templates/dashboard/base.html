@@ -123,6 +123,13 @@
                         </a>
                     </li>
 
+                    <li class="active-pro">
+                        <a href="{% url 'sell_data' %}">
+                            <i class="tim-icons icon-money-coins"></i>
+                            <p>Sell Data</p>
+                        </a>
+                    </li>
+
                 {% else %}
 
                     <li class="
@@ -179,11 +186,11 @@
                         </button>
                     </div>
 
-                        {% if dash_type == 'user' %}
+                    {% if dash_type == 'user' %}
                         <a class="navbar-brand" href="{% url 'ud_mainDash' %}">User Dashboard</a>
-                        {% else %}
+                    {% else %}
                         <a class="navbar-brand" href="javascript:void(0)">Doctor Dashboard</a>
-                        {% endif %}
+                    {% endif %}
 
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -194,12 +201,12 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="navbar-nav ml-auto">
-{#                        <li class="search-bar input-group">#}
-{#                            <button class="btn btn-link" id="search-button" data-toggle="modal"#}
-{#                                    data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>#}
-{#                                <span class="d-lg-none d-md-block">Search</span>#}
-{#                            </button>#}
-{#                        </li>#}
+                        {#                        <li class="search-bar input-group">#}
+                        {#                            <button class="btn btn-link" id="search-button" data-toggle="modal"#}
+                        {#                                    data-target="#searchModal"><i class="tim-icons icon-zoom-split"></i>#}
+                        {#                                <span class="d-lg-none d-md-block">Search</span>#}
+                        {#                            </button>#}
+                        {#                        </li>#}
 
 
                         {#                        <li class="dropdown nav-item">#}
