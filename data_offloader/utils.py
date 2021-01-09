@@ -14,22 +14,29 @@ queryset_dict = {
 '''
 
 
-def queryset_to_excel(queryset_dict, wb_name):
+def queryset_to_excel(queryset_dict, wb_name, deferred={}):
     workbook = xlwt.Workbook()
 
     sheet_names = list(queryset_dict.keys())
 
     for sheet_name in sheet_names:
         queryset = queryset_dict[sheet_name]
+
+        try:
+            deferred_cols = deferred[sheet_name]
+        except:
+            deferred_cols = []
+
+
         sheet = workbook.add_sheet(sheet_name)
 
         if (len(queryset) != 0):
-            write_queryset_to_sheet(queryset, sheet)
+            write_queryset_to_sheet(queryset, sheet, deferred_cols)
 
     workbook.save(wb_name)
 
 
-def write_queryset_to_sheet(queryset, sheet):
+def write_queryset_to_sheet(queryset, sheet, deferred_cols):
     header_style = xlwt.easyxf('font:bold on')
     columns = []
 
@@ -40,10 +47,12 @@ def write_queryset_to_sheet(queryset, sheet):
     for field in fields:
         col_name = field.name
 
-        sheet.write(0, i, col_name, header_style)  # Writing headings
-        columns.append(col_name)
+        if(not(col_name in deferred_cols)):
+            sheet.write(0, i, col_name, header_style)  # Writing headings
+            columns.append(col_name)
 
-        i = i + 1
+            i = i + 1
+
 
 
     i = 1
