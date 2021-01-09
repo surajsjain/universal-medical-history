@@ -4,6 +4,9 @@ from django.db.models import Q
 from medical_visit.models import *
 from usermgmt.models import UserDetails
 
+import os
+from .filecoin import upload
+
 def snapshot_user_data(user, month, year):
     q_dict={}
     deferred = {}
@@ -19,4 +22,12 @@ def snapshot_user_data(user, month, year):
     q_dict['drug_prescriptions'] = DrugPrescription.objects.filter(visit__in=q_dict['visits'])
     q_dict['medical_tests'] = TestPrescription.objects.filter(visit__in=q_dict['visits'])
 
-    queryset_to_excel(q_dict, 'media/sample.xls', deferred)
+    file_path = 'media/' + user.username + '_' + str(month) + '_' + str(year) + '.xls'
+
+    queryset_to_excel(q_dict, file_path, deferred)
+
+    url = upload(open(file_path, 'rb'))
+
+    os.remove(file_path)
+
+    return url

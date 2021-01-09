@@ -8,3 +8,4 @@ media/
 **/migrations
 **/__pycache__
 **/some_test.py
+**/weird.py
