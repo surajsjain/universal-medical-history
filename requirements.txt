@@ -37,7 +37,7 @@ lru-dict==1.1.6
 msgpack==0.6.2
 numpy==1.19.4
 ocean-contracts==0.5.8
-ocean-lib==0.5.3
+ocean-lib==0.5.5
 ocean-utils==0.4.2
 packaging==20.3
 parsimonious==0.8.1
