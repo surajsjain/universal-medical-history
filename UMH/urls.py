@@ -25,3 +25,6 @@ urlpatterns = [
     path('user_dash/', include('user_dash.urls')),
     path('doctor_dash/', include('doctor_dash.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += static(settings.DATA_SAMPLE_URL, document_root=settings.DATA_SAMPLE_ROOT)
