@@ -134,7 +134,7 @@
                         </div>
                         <div class="col-md-8">
                             {% if patient_details.father != None %}
-                                <a href="{% url 'medical_profile' patient_id=patient_details.father %}">View Details</a>
+                                <a href="{% url 'medical_profile' patient_id=patient_details.father.id %}">View Details</a>
                             {% else %}
                                 User not available
                             {% endif %}
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col-md-8">
                             {% if patient_details.mother != None %}
-                                <a href="{% url 'medical_profile' patient_id=patient_details.mother %}">View Details</a>
+                                <a href="{% url 'medical_profile' patient_id=patient_details.mother.id %}">View Details</a>
                             {% else %}
                                 User not available
                             {% endif %}
