@@ -206,8 +206,9 @@ def sell_data(request):
 
         dt_name = "User" + str(request.user.id) + "_" + str(data["month"]) + "_" + str(data['year'])
         dt_symbol = "UMH-" + str(request.user.id) + "-" + str(data["month"]) + "-" + str(data['year']) + '-' + str(randint(0, 100))
+        dataset_name = request.user.first_name + ' ' + request.user.last_name + "'s medical histroy from " + str(data["month"]) + "/" + str(data['year'])
 
-        did = publish_excel(data['private_key'], url, dt_name, dt_symbol)
+        did = publish_excel(data['private_key'], url, dt_name, dt_symbol, dataset_name, request.user.username)
 
         ctxt['did'] = did
         ctxt['dt_symbol'] = dt_symbol

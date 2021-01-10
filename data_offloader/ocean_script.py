@@ -17,7 +17,7 @@ def create_pool(ocean, token_address, alice_wallet):
 
     return pool
 
-def publish_excel(pvt_key, url, dt_name, dt_symbol):
+def publish_excel(pvt_key, url, dt_name, dt_symbol, dataset_name, username):
     config = {
        'network' : os.getenv('NETWORK_URL'),
        'metadataStoreUri' : os.getenv('AQUARIUS_URL'),
@@ -50,7 +50,9 @@ def publish_excel(pvt_key, url, dt_name, dt_symbol):
 
     metadata = {
         "main": {
-            "type": "dataset", "name": "Medical History Sample", "author": "Woffy",
+            "type": "dataset",
+            "name": dataset_name,
+            "author": username,
             "license": "CC0: Public Domain", "dateCreated": date_created,
             "files": [
                 {
