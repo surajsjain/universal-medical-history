@@ -1,5 +1,7 @@
 #setup Alice's ocean instance
 import os
+import time
+
 from ocean_lib.ocean.ocean import Ocean
 from ocean_lib.data_provider.data_service_provider import DataServiceProvider
 from ocean_utils.agreements.service_factory import ServiceDescriptor
@@ -84,13 +86,8 @@ def publish_excel(pvt_key, url, dt_name, dt_symbol, dataset_name, username):
     #    from_wallet=alice_wallet
     # )
 
-
-    while(True):
-        try:
-            pool = create_pool(ocean, token_address, alice_wallet)
-            break
-        except:
-            continue
+    time.sleep(30)
+    pool = create_pool(ocean, token_address, alice_wallet)
 
     pool_address = pool.address
     print(f"pool_address = '{pool_address}'")
